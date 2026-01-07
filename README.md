@@ -1,9 +1,5 @@
-# Webpack5
+# Goblin Game + DOM Table
 
-![CI](https://github.com/Seba69xxx/ahj-env-task/actions/workflows/web.yml/badge.svg)
+![Build Status](https://github.com/Seba69xxx/ahj-env-task/actions/workflows/web.yml/badge.svg)
 
-
-
-[Руководство по настройке Webpack](https://webpack.js.org/guides/)
-[Руководство по настройке GitHub Actions](https://docs.github.com/en/actions/quickstart)
-
+### 🔗 [PLAY GAME HERE](https://seba69xxx.github.io/ahj-env-task/)
