@@ -3,7 +3,6 @@ import Game from './js/game';
 import TableSorter from './js/table';
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.body.innerHTML = '';
   const gameContainer = document.createElement('div');
   document.body.appendChild(gameContainer);
   const game = new Game(gameContainer);
