@@ -31,7 +31,7 @@ export default class GamePlay {
     for (let i = 0; i < this.boardSize ** 2; i += 1) {
       const cell = document.createElement('div');
       cell.classList.add('cell');
-      this.boardEl.appendChild(cell);
+      this.boardEl.append(cell);
     }
 
     this.cells = Array.from(this.boardEl.children);
@@ -44,13 +44,23 @@ export default class GamePlay {
     }
     
     if (position !== null) {
-      this.cells[position].appendChild(imgElement);
+      this.cells[position].append(imgElement);
     }
   }
 
   updateStats(score, miss) {
     this.scoreEl.textContent = score;
     this.missEl.textContent = miss;
+  }
+
+  showGameOver(score) {
+    const gameOverDiv = document.createElement('div');
+    gameOverDiv.classList.add('game-over');
+    gameOverDiv.innerHTML = `
+      <span>Game Over!</span>
+      <span>Your score: ${score}</span>
+    `;
+    this.boardEl.append(gameOverDiv);
   }
 
   addCellClickListener(callback) {

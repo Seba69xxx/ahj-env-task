@@ -8,6 +8,8 @@ export default class GameController {
     this.currentPosition = null;
     this.timerId = null;
     this.isGoblinLocked = false;
+    this.maxMisses = 5;
+    this.cellsCount = 16;
   }
 
   init() {
@@ -33,22 +35,23 @@ export default class GameController {
       this.miss += 1;
       this.gamePlay.updateStats(this.score, this.miss);
       
-      if (this.miss >= 5) {
+      if (this.miss >= this.maxMisses) {
         this.gameOver();
         return;
       }
     }
 
-    let newPosition = Math.floor(Math.random() * 16);
-    while (newPosition === this.currentPosition) {
-      newPosition = Math.floor(Math.random() * 16);
-    }
+    let newPosition;
+    do {
+      newPosition = Math.floor(Math.random() * this.cellsCount);
+    } while (newPosition === this.currentPosition);
 
     this.currentPosition = newPosition;
     this.isGoblinLocked = true;
 
     const img = document.createElement('img');
     img.src = goblinImg;
+    img.alt = 'Goblin';
     img.classList.add('goblin');
 
     this.gamePlay.redrawPositions(this.currentPosition, img);
@@ -68,6 +71,6 @@ export default class GameController {
   gameOver() {
     clearInterval(this.timerId);
     this.timerId = null;
-    alert(`Game Over! Your score: ${this.score}`);
+    this.gamePlay.showGameOver(this.score);
   }
 }

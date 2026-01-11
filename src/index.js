@@ -1,15 +1,11 @@
 import './css/style.css';
-import Game from './js/game';
-import TableSorter from './js/table';
+import GamePlay from './js/GamePlay';
+import GameController from './js/GameController';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const gameContainer = document.createElement('div');
-  document.body.append(gameContainer);
-  const game = new Game(gameContainer);
-  game.init();
+  const gamePlay = new GamePlay();
+  gamePlay.bindToDOM(document.querySelector('body'));
 
-  const tableContainer = document.createElement('div');
-  document.body.append(tableContainer);
-  const tableSorter = new TableSorter(tableContainer);
-  tableSorter.init();
+  const gameController = new GameController(gamePlay);
+  gameController.init();
 });
