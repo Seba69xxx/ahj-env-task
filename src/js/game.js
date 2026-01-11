@@ -5,6 +5,7 @@ export default class Game {
     this.element = element;
     this.boardSize = 4;
     this.activeCell = null;
+    this.intervalId = null;
   }
 
   init() {
@@ -20,10 +21,10 @@ export default class Game {
     for (let i = 0; i < this.boardSize ** 2; i += 1) {
       const cell = document.createElement('div');
       cell.classList.add('cell');
-      container.appendChild(cell);
+      container.append(cell);
     }
 
-    this.element.appendChild(container);
+    this.element.append(container);
     this.cells = Array.from(document.querySelectorAll('.cell'));
   }
 
@@ -32,7 +33,11 @@ export default class Game {
     img.src = goblinImg;
     img.classList.add('goblin');
 
-    setInterval(() => {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
+
+    this.intervalId = setInterval(() => {
       this.moveGoblin(img);
     }, 1000);
   }
@@ -45,6 +50,6 @@ export default class Game {
     }
 
     this.activeCell = newIndex;
-    this.cells[newIndex].appendChild(img);
+    this.cells[newIndex].append(img);
   }
 }

@@ -1,6 +1,7 @@
 export default class TableSorter {
   constructor(element) {
     this.element = element;
+    this.intervalId = null;
     this.data = [
       { id: 26, title: "Побег из Шоушенка", imdb: 9.30, year: 1994 },
       { id: 25, title: "Крёстный отец", imdb: 9.20, year: 1972 },
@@ -56,17 +57,21 @@ export default class TableSorter {
         <td>(${item.year})</td>
         <td>imdb: ${item.imdb.toFixed(2)}</td>
       `;
-      tbody.appendChild(row);
+      tbody.append(row);
     });
 
     this.element.classList.add('table-container');
-    this.element.appendChild(table);
+    this.element.append(table);
     this.tbody = tbody;
     this.headers = table.querySelectorAll('th');
   }
 
   startSortingCycle() {
-    setInterval(() => {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
+
+    this.intervalId = setInterval(() => {
       const { prop, dir } = this.sortOrder[this.currentSortIndex];
       this.sortGrid(prop, dir);
       this.currentSortIndex = (this.currentSortIndex + 1) % this.sortOrder.length;
